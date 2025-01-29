@@ -100,10 +100,14 @@ const FloatingButton: React.FC<Props> = ({ onSubmit }) => {
   const [unlockDate, setUnlockDate] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = () => {
+   const handleSubmit = () => {
     setError('');
     if (capsuleMessage && unlockDate) {
-      onSubmit({ capsuleMessage, share, unlockDate });
+      // Convert local datetime to UTC
+      const localDate = new Date(unlockDate);
+      const utcDate = localDate.toISOString(); // Convert to UTC string
+  
+      onSubmit({ capsuleMessage, share, unlockDate: utcDate });
       setShowModal(false);
       setCapsuleMessage('');
       setShare(false);
