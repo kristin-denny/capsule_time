@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { DashboardLayout, MainContent } from "../components/layout/DashboardLayout";
 import Footer from "../components/layout/Footer";
@@ -8,23 +8,15 @@ import Auth from "../utils/auth";
 import { QUERY_SHARED_CAPSULES } from "../utils/queries";
 
 export default function Dashboard() {
-  const [cachedCapsules, setCachedCapsules] = useState(() => {
-    // Check if shared capsules exist in local storage
-    const cached = localStorage.getItem("sharedCapsules");
-    return cached ? JSON.parse(cached) : [];
-  });
-
-  const { loading, data, error } = Auth.loggedIn()
-    ? useQuery(QUERY_SHARED_CAPSULES)
-    : { loading: false, data: null };
+  const { loading, data, error, refetch } = Auth.loggedIn()
+    ? useQuery(QUERY_SHARED_CAPSULES, { fetchPolicy: "network-only" }) // Always fetch fresh data
+    : { loading: false, data: null, refetch: () => {} };
 
   useEffect(() => {
-    if (data?.sharedCapsules && data.sharedCapsules.length > 0) {
-      // Update local storage with fetched data
-      localStorage.setItem("sharedCapsules", JSON.stringify(data.sharedCapsules));
-      setCachedCapsules(data.sharedCapsules); // Update local state
+    if (Auth.loggedIn()) {
+      refetch(); // Ensures the query runs every time the page is visited
     }
-  }, [data]);
+  }, []); // Runs once on mount
 
   if (error) {
     console.error(error);
@@ -39,8 +31,7 @@ export default function Dashboard() {
       .sort((a, b) => new Date(b.unlockDate).getTime() - new Date(a.unlockDate).getTime()); // Sort by unlockDate descending
   };
 
-  // Use either the fetched capsules or cached data
-  const capsules = data?.sharedCapsules || cachedCapsules;
+  const capsules = data?.sharedCapsules || [];
 
   // Apply filtering and sorting
   const filteredCapsules = processCapsules(capsules);
