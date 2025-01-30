@@ -108,13 +108,13 @@ const Profile = () => {
           <h2>{data.me.username}'s Profile Page</h2>
           <div style={{ margin: '40px 0' }} className='card'>
             <h3>Future Capsules</h3>
-            <p><span className='bold'>Number of Capsules:</span>{' '}<span> {nextCapsuleInfo.futureCount}</span></p>
+            <p><span className='bold'>Number of Future Capsules:</span>{' '}<span> {nextCapsuleInfo.futureCount}</span></p>
             <p>
-              <span className='bold'>Next Unlock Date:</span>{' '}
+              <span className='bold'>Next Capsule Unlock Date:</span>{' '}
               <span className='italic'>{nextCapsuleInfo.nextUnlockDate || 'No future capsules'}</span>
             </p>
             <p>
-              <span className='bold'>Preview Message:</span>{' '}
+              <span className='bold'>Next Capsule Preview Message:</span>{' '}
               <span className='italic'>{nextCapsuleInfo.previewMessage || 'No preview available'}</span>
             </p>
           </div>
