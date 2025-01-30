@@ -19,11 +19,11 @@ Installation is not necessary, simply follow the url provided below.
 
 ## Usage
 
-To use, go to: , create an account and start creating capsules!
+To use, go to: https://capsule-time.onrender.com, create an account and start creating capsules!
 
 
 ## Credits
-This application use GraphQL, MongoDB, Javascript, Node.js, 
+This application use GraphQL, MongoDB, Javascript, Node.js, React, and CSS style components.
 
 
 ## License
