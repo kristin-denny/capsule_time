@@ -2,18 +2,31 @@ import styled from 'styled-components';
 
 const LandingLayout = styled.div`
     height: 100vh;
-    height: 100svh;
-    display: grid;
-    // justify-content: center;
-    // align-items: center;
-    grid-template-rows: 1fr auto; /* main(1fr) footer(auto) */
+  display: grid;
+  grid-template-rows: 1fr auto; /*  main(1fr) footer(auto) */
+  scroll-behavior: smooth;
+
+  /* Hiding the scrollbar but allowing scrolling */
+  ::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+  }
+
+  /* Optional: Hide the scrollbar for non-WebKit browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 
     /* two column grid */
-    .grid-two-column {
+    .grid-two-columns {
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     gap: 16px;
+
+     @media (max-width: 768px) {
+            grid-template-columns: 1fr; /* Switch to a single column layout */
+            gap: 12px;
+        }
     
   }
 
@@ -86,4 +99,10 @@ const LandingLayout = styled.div`
   }
 `;
 
-export default LandingLayout;
+const MainContent = styled.main`
+  height: 100%;
+  flex-grow: 1; /* Take up available space */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+`;
+
+export  {LandingLayout, MainContent};
