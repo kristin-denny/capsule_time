@@ -41,11 +41,13 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Background>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Container >
             <AddCapsuleForm>
               <Outlet />
             </AddCapsuleForm>
           </Container>
+        </div>
         </Background>
       </ThemeProvider>
     </ApolloProvider>

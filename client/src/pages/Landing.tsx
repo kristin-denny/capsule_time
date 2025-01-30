@@ -3,7 +3,7 @@ import LoginForm from '../components/api/LoginForm';
 import SignupForm from '../components/api/SignupForm';
 import Footer from '../components/layout/Footer';
 import StyledButton from '../components/common/StyledButton';
-import LandingLayout from '../components/layout/LandingLayout';
+import {LandingLayout, MainContent} from '../components/layout/LandingLayout';
 import { Link } from 'react-router-dom'; // Link to navigate to other pages
 
 export default function Landing() {
@@ -11,7 +11,8 @@ const [newVisitor, setNewVisitor] = useState(true);
 
 return (
     <LandingLayout>
-        <main className='grid-two-column'>
+        <MainContent>
+          <div className='grid-two-columns'>
         <div className='info-card'> 
           <h1>Welcome to Capsule Time</h1>
           <p>In this application, you can send a message to your future self! How cool is that? If that doesn't catch your attention, how does reading about public capsules sound? We know you're curious—log in or create an account to find out more.</p>
@@ -44,7 +45,8 @@ return (
           </p>
           </div>
         </div>
-        </main>
+        </div>
+        </MainContent>
         <Footer />
     </LandingLayout>
         ) 
